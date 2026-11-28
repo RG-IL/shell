@@ -74,7 +74,7 @@ Item {
                 visible: root.modelData?.type !== "app" && !root.isMaterialIcon && root.iconValue !== ""
                 text: root.iconValue
                 color: root.modelData?.checked ? Colours.palette.m3primary : Colours.palette.m3onSurfaceVariant
-                font: Tokens.font.mono.builders.large.scale(1.15).build()
+                font: Tokens.font.mono.builders.large.scale(1.7).build()
                 anchors.centerIn: parent
             }
         }
