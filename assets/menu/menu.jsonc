@@ -49,7 +49,7 @@
 
   "trigger.capture": { "icon": "", "label": "Capture", "aliases": ["screenshot", "screenrecord", "recording"] },
   "trigger.capture.screenshot": { "icon": "screenshot_region", "label": "Screenshot", "when": "command -v caelestia", "action": "caelestia screenshot -r" },
-  "trigger.capture.screenrecord.stop": { "icon": "stop_circle", "label": "Stop Screenrecording", "when": "pgrep -f '^gpu-screen-recorder'", "action": "pkill -INT -f gpu-screen-recorder" },
+  "trigger.capture.screenrecord.stop": { "icon": "stop_circle", "label": "Stop Screenrecording", "when": "command -v caelestia && pidof gpu-screen-recorder", "action": "pidof gpu-screen-recorder >/dev/null && exec caelestia record" },
   "trigger.capture.screenrecord": { "icon": "videocam", "label": "Screenrecord", "when": "command -v caelestia" },
   "trigger.capture.screenrecord.fullscreen": { "icon": "fullscreen", "label": "Record fullscreen", "action": "caelestia record" },
   "trigger.capture.screenrecord.region": { "icon": "crop", "label": "Record region", "action": "caelestia record -r" },
