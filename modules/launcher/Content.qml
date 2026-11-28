@@ -17,6 +17,7 @@ Item {
 
     readonly property int padding: Tokens.padding.large
     readonly property int rounding: Tokens.rounding.extraLarge
+    readonly property alias list: list
 
     function moveListSelection(delta: int): void {
         const l = list.currentList;

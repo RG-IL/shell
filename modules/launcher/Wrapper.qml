@@ -29,7 +29,7 @@ Item {
             return l.hoveredItem;
         return l.currentItem;
     }
-    readonly property bool showingClipboard: content.item?.list?.showClipboard ?? false // qmllint disable missing-property
+    readonly property bool showingClipboardPreview: content.item?.list?.showPreview ?? false // qmllint disable missing-property
 
     readonly property real maxHeight: {
         let max = screen.height - Config.border.thickness * 2 + Tokens.padding.extraLarge;

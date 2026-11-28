@@ -114,7 +114,7 @@ Item {
         id: clipboardPreview
 
         currentItem: launcher.currentClipboardItem
-        shouldShow: root.screenState.launcher && launcher.showingClipboard && !root.screenState.utilities && !root.screenState.sidebar && clipboardPreview.hasImage
+        shouldShow: root.screenState.launcher && launcher.showingClipboardPreview && !root.screenState.utilities && !root.screenState.sidebar && clipboardPreview.hasImage
 
         anchors.left: launcher.right
         anchors.leftMargin: Tokens.spacing.large + 4
