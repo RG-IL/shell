@@ -64,7 +64,7 @@ esac
 
 install_selections() {
   source menu-sudo-keepalive
-  $AUR -S --needed --noconfirm $*
+  "$AUR" -S --needed -- "$@"
 }
 
 if [[ $AUR == yay ]]; then
@@ -82,8 +82,8 @@ if [[ $AUR == yay ]]; then
   )
   pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
   [[ -z $pkg_names ]] && exit 0
-  pkgs=$(echo "$pkg_names" | sed 's/^/aur\//' | tr '\n' ' ')
-  install_selections $pkgs
+  mapfile -t pkgs < <(sed 's/^/aur\//' <<<"$pkg_names")
+  install_selections "${pkgs[@]}"
   exit 0
 fi
 
@@ -112,5 +112,5 @@ pkg_names=$(
 )
 
 [[ -z $pkg_names ]] && exit 0
-pkgs=$(tr '\n' ' ' <<<"$pkg_names")
-install_selections $pkgs
+mapfile -t pkgs <<<"$pkg_names"
+install_selections "${pkgs[@]}"

@@ -79,13 +79,11 @@
   "setup.network": { "icon": "wifi", "label": "Network", "aliases": ["wifi"] },
   "setup.network.qr": { "icon": "qr_code_2", "label": "Wi-Fi QR Code", "aliases": ["wifi-qr"], "when": "command -v qrencode && nmcli -t -f TYPE,STATE device status 2>/dev/null | grep -q '^wifi:connected'", "internal": "wifiqr" },
   "setup.security": { "icon": "security", "label": "Security" },
-  "setup.security.fingerprint": { "icon": "fingerprint", "label": "Fingerprint", "when": "command -v pacman && lsusb 2>/dev/null | grep -qiE 'fingerprint|validity|authentec|elan|upek'", "action": "menu-term menu-security-fingerprint-setup" },
-  "setup.security.passwordless-sudo": { "icon": "admin_panel_settings", "label": "Passwordless Sudo", "when": "command -v sudo && command -v gum", "action": "menu-term menu-sudo-passwordless" },
-  "setup.direct-boot": { "icon": "developer_board", "label": "Direct Boot", "when": "[[ -d /sys/firmware/efi ]] && command -v efibootmgr && command -v gum", "action": "menu-term menu-direct-boot" },
+  "setup.security.passwordless-sudo": { "icon": "admin_panel_settings", "label": "Passwordless Sudo", "when": "command -v sudo && command -v gum && command -v systemctl && command -v systemd-run && [[ -d /run/systemd/system ]]", "action": "menu-term menu-sudo-passwordless" },
 
   // Install
   "install.package": { "icon": "inventory_2", "label": "Package", "when": "command -v pacman && command -v fzf", "action": "menu-term menu-pkg-install" },
-  "install.aur": { "icon": "deployed_code", "label": "AUR", "when": "(command -v paru || command -v yay) && command -v fzf", "action": "menu-term menu-pkg-aur-install" },
+  "install.aur": { "icon": "deployed_code", "label": "AUR", "when": "command -v pacman && command -v fzf && (command -v yay || (command -v paru && command -v curl && command -v jq && command -v zcat))", "action": "menu-term menu-pkg-aur-install" },
   "install.webapp": { "icon": "public", "label": "Web App", "when": "command -v gum", "action": "menu-term menu-webapp-install" },
   "install.tui": { "icon": "terminal", "label": "TUI", "when": "command -v gum", "action": "menu-term menu-tui-install" },
 
@@ -93,8 +91,6 @@
   "remove.package": { "icon": "inventory_2", "label": "Package", "when": "command -v pacman && command -v fzf", "action": "menu-term menu-pkg-remove" },
   "remove.webapp": { "icon": "public", "label": "Web App", "when": "grep -qsE '^Exec=.*menu-launch[- ]webapp' \"$HOME\"/.local/share/applications/*.desktop", "action": "menu-term menu-webapp-remove" },
   "remove.tui": { "icon": "terminal", "label": "TUI", "when": "grep -qsE '^Exec=.*(menu-launch tui|--class=TUI\\.|--app-id=TUI\\.)' \"$HOME\"/.local/share/applications/*.desktop", "action": "menu-term menu-tui-remove" },
-  "remove.security": { "icon": "security", "label": "Security", "when": "command -v pacman && pacman -Qq fprintd" },
-  "remove.security.fingerprint": { "icon": "fingerprint", "label": "Fingerprint", "when": "command -v pacman && pacman -Qq fprintd", "action": "menu-term menu-security-fingerprint-remove" },
 
   // Update
   "update.caelestia": { "icon": "system_update_alt", "label": "Caelestia", "when": "command -v caelestia", "action": "menu-term caelestia update" },
