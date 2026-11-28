@@ -232,11 +232,11 @@ Item {
         id: empty
 
         readonly property string emptyIcon: root.state === "wallpapers" ? "wallpaper_slideshow" : root.state === "menu" && MenuService.error !== "" ? "error" : root.state === "menu" ? "menu_open" : root.state === "clipboard" && Clipboard.history.length === 0 ? "content_paste_off" : "manage_search"
-        readonly property string emptyTitle: root.state === "wallpapers" ? Tr.tr("No wallpapers found") : root.state === "menu" && MenuService.error !== "" ? Tr.tr("Menu definition error") : root.state === "menu" ? Tr.tr("No matching entries") : root.state === "clipboard" && Clipboard.history.length === 0 ? Tr.tr("Clipboard is empty") : Tr.tr("No results")
+        readonly property string emptyTitle: root.state === "wallpapers" ? Tr.tr("No wallpapers found") : root.state === "menu" && MenuService.error !== "" ? Tr.tr("Menu definition error") : root.state === "menu" ? Tr.tr("No matching entries") : Tr.tr("No results")
         readonly property string emptySubtitle: root.state === "menu" && MenuService.error !== "" ? MenuService.error : root.state === "wallpapers" && Wallpapers.list.length === 0 ? Tr.tr("Try putting some wallpapers in %1").arg(Paths.shortenHome(Paths.wallsdir)) : root.state === "clipboard" && Clipboard.history.length === 0 ? Tr.tr("Copy something and it will show up here") : Tr.tr("Try searching for something else")
 
-        opacity: root.currentList?.count === 0 ? 1 : 0
-        scale: root.currentList?.count === 0 ? 1 : 0.5
+        opacity: root.state !== "clipboard" && root.state !== "picker" && root.currentList?.count === 0 ? 1 : 0
+        scale: root.state !== "clipboard" && root.state !== "picker" && root.currentList?.count === 0 ? 1 : 0.5
 
         spacing: Tokens.spacing.medium
         padding: Tokens.padding.large

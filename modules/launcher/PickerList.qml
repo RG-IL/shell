@@ -158,7 +158,7 @@ Item {
         screenState.launcher = false;
     }
 
-    implicitHeight: (Tokens.sizes.launcher.itemHeight + Tokens.spacing.small) * Config.launcher.maxShown - Tokens.spacing.small + hints.implicitHeight + Tokens.spacing.small
+    implicitHeight: count === 0 ? tabs.implicitHeight + emptyState.implicitHeight + hints.implicitHeight + Tokens.spacing.small * 2 : (Tokens.sizes.launcher.itemHeight + Tokens.spacing.small) * Config.launcher.maxShown - Tokens.spacing.small + hints.implicitHeight + Tokens.spacing.small
 
     Component.onCompleted: recent = source.recent
     onSourceChanged: recent = source.recent
@@ -200,6 +200,38 @@ Item {
         built: root.resultsBuilt
         opacity: root.searching ? 1 : 0
         enabled: root.searching
+    }
+
+    Row {
+        id: emptyState
+
+        visible: root.count === 0
+        anchors.centerIn: browse
+        spacing: Tokens.spacing.medium
+        padding: Tokens.padding.medium
+
+        MaterialIcon {
+            text: "manage_search"
+            color: Colours.palette.m3onSurfaceVariant
+            fontStyle: Tokens.font.icon.extraLarge
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        Column {
+            anchors.verticalCenter: parent.verticalCenter
+
+            StyledText {
+                text: root.source.mode === "emoji" ? Tr.tr("No emojis found") : root.source.mode === "kaomoji" ? Tr.tr("No kaomoji found") : Tr.tr("No symbols found")
+                color: Colours.palette.m3onSurfaceVariant
+                font: Tokens.font.body.builders.large.weight(Font.Medium).build()
+            }
+
+            StyledText {
+                text: Tr.tr("Try searching for something else")
+                color: Colours.palette.m3onSurfaceVariant
+                font: Tokens.font.body.medium
+            }
+        }
     }
 
     Item {

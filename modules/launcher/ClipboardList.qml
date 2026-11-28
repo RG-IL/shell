@@ -282,13 +282,13 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
 
             StyledText {
-                text: Tr.tr("No clipboard history")
+                text: Clipboard.history.length === 0 ? Tr.tr("No clipboard history") : Tr.tr("No results")
                 color: Colours.palette.m3onSurfaceVariant
                 font: Tokens.font.body.builders.large.weight(Font.Medium).build()
             }
 
             StyledText {
-                text: Tr.tr("Copy something to populate clipboard history")
+                text: Clipboard.history.length === 0 ? Tr.tr("Copy something to populate clipboard history") : Tr.tr("Try searching for something else")
                 color: Colours.palette.m3onSurfaceVariant
                 font: Tokens.font.body.medium
             }
