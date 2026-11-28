@@ -28,7 +28,6 @@
   "install": { "icon": "download", "label": "Install" },
   "remove": { "icon": "delete", "label": "Remove", "aliases": ["uninstall"] },
   "update": { "icon": "update", "label": "Update", "aliases": ["upgrade", "refresh"] },
-  "about": { "icon": "info", "label": "About", "internal": "about" },
   "system": { "icon": "power_settings_new", "label": "System", "aliases": ["power", "power-menu"] },
 
   // Learn
@@ -77,7 +76,6 @@
   "style.hyprland": { "icon": "edit_note", "label": "Hyprland Config", "when": "[[ -f $HOME/.config/hypr/hyprland.conf || -f $HOME/.config/hypr/hyprland.lua ]]", "action": "if [[ -f $HOME/.config/hypr/hyprland.lua ]]; then exec menu-edit \"$HOME/.config/hypr/hyprland.lua\"; else exec menu-edit \"$HOME/.config/hypr/hyprland.conf\"; fi" },
 
   // Setup
-  "setup.settings": { "icon": "settings", "label": "Shell Settings", "aliases": ["nexus"], "internal": "settings" },
   "setup.network": { "icon": "wifi", "label": "Network", "aliases": ["wifi"] },
   "setup.network.qr": { "icon": "qr_code_2", "label": "Wi-Fi QR Code", "aliases": ["wifi-qr"], "when": "command -v qrencode && nmcli -t -f TYPE,STATE device status 2>/dev/null | grep -q '^wifi:connected'", "internal": "wifiqr" },
   "setup.security": { "icon": "security", "label": "Security" },
@@ -102,10 +100,12 @@
   "update.caelestia": { "icon": "system_update_alt", "label": "Caelestia", "when": "command -v caelestia", "action": "menu-term caelestia update" },
 
   // System
+  "system.settings": { "icon": "settings", "label": "Shell Settings", "aliases": ["settings", "nexus"], "internal": "settings" },
   "system.lock": { "icon": "lock", "label": "Lock", "internal": "lock" },
   "system.suspend": { "icon": "bedtime", "label": "Suspend", "when": "[[ $(systemctl is-enabled systemd-suspend.service 2>/dev/null) != masked ]]", "internal": "suspend" },
   "system.hibernate": { "icon": "ac_unit", "label": "Hibernate", "when": "swapon --show --noheadings 2>/dev/null | grep -q .", "internal": "hibernate" },
   "system.logout": { "icon": "logout", "label": "Logout", "internal": "logout" },
   "system.reboot": { "icon": "restart_alt", "label": "Reboot", "internal": "reboot" },
-  "system.shutdown": { "icon": "power_settings_new", "label": "Shutdown", "internal": "shutdown" }
+  "system.shutdown": { "icon": "power_settings_new", "label": "Shutdown", "internal": "shutdown" },
+  "system.about": { "icon": "info", "label": "About", "internal": "about" }
 }

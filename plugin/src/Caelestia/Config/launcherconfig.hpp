@@ -111,6 +111,12 @@ class LauncherConfig : public settings::ObjectNode {
                 { u"command"_s, QStringList{ u"autocomplete"_s, u"wallpaper"_s } },
             }),
             vmap({
+                { u"name"_s, markCtx(u"Clipboard History"_s, u"launcher action"_s) },
+                { u"icon"_s, u"content_paste"_s },
+                { u"description"_s, mark(u"Browse and restore items from clipboard history"_s) },
+                { u"command"_s, QStringList{ u"autocomplete"_s, u"clipboard"_s } },
+            }),
+            vmap({
                 { u"name"_s, markCtx(u"Emoji"_s, u"launcher action"_s) },
                 { u"icon"_s, u"mood"_s },
                 { u"description"_s, mark(u"Pick an emoji to copy or paste"_s) },

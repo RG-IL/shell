@@ -24,7 +24,9 @@ Searcher {
 
         model: {
             const enableDangerous = GlobalConfig.launcher.enableDangerousActions;
-            return GlobalConfig.launcher.actions.values.filter(a => a.enabled && (enableDangerous || !a.dangerous));
+            const enableClipboard = GlobalConfig.launcher.clipboard.enabled;
+            return GlobalConfig.launcher.actions.values.filter(a => a.enabled && (enableDangerous || !a.dangerous)
+                && (enableClipboard || a.command[0] !== "autocomplete" || a.command[1] !== "clipboard"));
         }
 
         Action {}
