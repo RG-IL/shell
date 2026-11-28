@@ -38,9 +38,14 @@ Singleton {
     }
 
     function copyToClipboard(item: var): void {
-        const input = item.id + "\t" + item.content;
-        Quickshell.execDetached(["sh", "-c", `echo '${input}' | cliphist decode | wl-copy`]);
-        Toaster.toast(Tr.tr("Copied to clipboard"), item.preview, "content_paste");
+        const id = String(item.id);
+        if (!/^[0-9]+$/.test(id) || copyProcess.running)
+            return;
+
+        const mime = item.mime === "image/jpg" ? "image/jpeg" : item.mime;
+        copyProcess.command = ["bash", "-o", "pipefail", "-c", 'cliphist decode "$1" | wl-copy "${@:2}"', "clipboard-copy", id, ...(item.isImage ? ["--type", mime] : [])];
+        copyProcess.preview = item.preview;
+        copyProcess.running = true;
     }
 
     // Enter pastes into the window the launcher opened over, as Omacale's
@@ -182,6 +187,19 @@ Singleton {
                     root.history = [];
                 }
             }
+        }
+    }
+
+    Process {
+        id: copyProcess
+
+        property string preview: ""
+
+        onExited: exitCode => {
+            if (exitCode === 0)
+                Toaster.toast(Tr.tr("Copied to clipboard"), copyProcess.preview, "content_paste");
+            else
+                Toaster.toast(Tr.tr("Copy failed"), Tr.tr("Could not restore the clipboard entry"), "error");
         }
     }
 
